@@ -21,6 +21,8 @@ def summarize():
     text = request.form['text']
     if len(text) > 100:
         output = query({"inputs": text})
+        if 'error' in output:
+            return jsonify({'summary': 'Error from Hugging Face API: ' + output['error']})
         summary = output[0]['summary_text'] if 'summary_text' in output[0] else "Error: Unable to summarize text"
     else:
         summary = "The text is too short to be summarized"
@@ -28,3 +30,4 @@ def summarize():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
