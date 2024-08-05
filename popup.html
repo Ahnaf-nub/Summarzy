@@ -1,30 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Summarzy</title>
+  <title>Text Summarizer</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Summarzy</h1>
-  <form id="summarize-form" action="http://127.0.0.1:5000/summarize" method="post">
-    <textarea name="text" placeholder="Enter text to summarize"></textarea>
+  <form id="summarize-form">
+    <textarea name="text" id="text-input" placeholder="Enter text to summarize"></textarea>
     <button type="submit">Summarize</button>
   </form>
   <div id="summary"></div>
-  <script>
-    document.getElementById('summarize-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      fetch('http://127.0.0.1:5000/summarize', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('summary').innerText = data.summary;
-        document.getElementsByName('text')[0].value = data.summary;
-      });
-    });
-  </script>
+  <script src="popup.js"></script>
 </body>
 </html>
